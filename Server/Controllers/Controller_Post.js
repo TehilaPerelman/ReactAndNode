@@ -210,7 +210,7 @@ const deletePost = async (req, res) => {
     res.status(500).json({ message: "שגיאת שרת" });
   }
 };
-
+ 
 // ✅ שליפת פוסט לפי מזהה
 const getPostById = async (req, res) => {
   try {
