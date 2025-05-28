@@ -746,12 +746,135 @@
 // export default PostFeed;
 
 
+// import { Link } from 'react-router-dom';
+// import { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchPosts, deletePost } from '../Store/postsSlice'; // וודא שהנתיב נכון
+// import { Box, Typography, Card, CardContent, CircularProgress, Button } from '@mui/material';
+// import EditPost from '../Component/EditPost'; // וודא שהנתיב נכון
 
+// const PostFeed = () => {
+//   const dispatch = useDispatch();
+//   const { items, status, error } = useSelector((state) => state.posts);
+//   const [editingPost, setEditingPost] = useState(null);
+
+//   useEffect(() => {
+//     if (status === 'idle') {
+//       dispatch(fetchPosts());
+//     }
+//   }, [dispatch, status]);
+
+//   const handleDelete = (postId) => {
+//     if (window.confirm('האם אתה בטוח שברצונך למחוק את הפוסט?')) {
+//       dispatch(deletePost(postId));
+//     }
+//   };
+
+//   const startEdit = (post) => setEditingPost(post);
+//   const cancelEdit = () => setEditingPost(null);
+
+//   if (status === 'loading') {
+//     return (
+//       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
+//         <CircularProgress />
+//       </Box>
+//     );
+//   }
+
+//   if (status === 'failed') {
+//     return (
+//       <Typography color="error" sx={{ textAlign: 'center', mt: 5 }}>
+//         שגיאה בטעינת הפוסטים: {error}
+//       </Typography>
+//     );
+//   }
+
+//   return (
+//     <Box
+//       sx={{
+//         minHeight: '100vh',
+//         width: '100vw',
+//         display: 'flex',
+//         flexDirection: 'column',
+//         alignItems: 'center',
+//         background: '#f9f4ef',
+//         overflowX: 'hidden',
+//         paddingTop: 2,
+//       }}
+//     >
+//       <Typography variant="h4" gutterBottom>
+//         פוסטים אחרונים
+//       </Typography>
+
+//       {editingPost && <EditPost post={editingPost} onCancel={cancelEdit} />}
+
+//       <Box
+//         sx={{
+//           display: 'grid',
+//           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+//           gap: 3,
+//           width: '90%',
+//           maxWidth: '1200px',
+//         }}
+//       >
+//         {items.length === 0 ? (
+//           <Typography variant="body1">אין פוסטים להצגה כרגע.</Typography>
+//         ) : (
+//           items.map((post) => (
+//             <Card
+//               key={post._id}
+//               sx={{
+//                 borderRadius: 2,
+//                 boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+//                 transition: 'transform 0.3s ease',
+//                 ':hover': {
+//                   transform: 'scale(1.05)',
+//                   boxShadow: '0 6px 12px rgba(0, 0, 0, 0.2)',
+//                 },
+//               }}
+//             >
+//               <CardContent>
+//                 <Typography variant="h6" fontWeight="bold">
+//                   {post.author?.UserName || 'אנונימי'}
+//                 </Typography>
+//                 <Typography variant="body1" sx={{ marginY: 1 }}>
+//                   {post.content}
+//                 </Typography>
+//                 <Typography variant="caption" color="textSecondary">
+//                   {new Date(post.createdAt).toLocaleString('he-IL')}
+//                 </Typography>
+//                 <Button
+//                   variant="outlined"
+//                   color="primary"
+//                   onClick={() => startEdit(post)}
+//                   sx={{ mt: 2, mr: 1 }}
+//                 >
+//                   ערוך
+//                 </Button>
+//                 <Button
+//                   variant="outlined"
+//                   color="error"
+//                   onClick={() => handleDelete(post._id)}
+//                   sx={{ mt: 2 }}
+//                 >
+//                   מחק
+//                 </Button>
+//               </CardContent>
+//             </Card>
+//           ))
+//         )}
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default PostFeed;
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts, deletePost } from '../Store/postsSlice'; // וודא שהנתיב נכון
+import { fetchPosts, deletePost } from '../Store/postsSlice';
 import { Box, Typography, Card, CardContent, CircularProgress, Button } from '@mui/material';
-import EditPost from '../Component/EditPost'; // וודא שהנתיב נכון
+import { Link } from 'react-router-dom';
+import EditPost from '../Component/EditPost';
 
 const PostFeed = () => {
   const dispatch = useDispatch();
@@ -790,77 +913,37 @@ const PostFeed = () => {
   }
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        width: '100vw',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        background: '#f9f4ef',
-        overflowX: 'hidden',
-        paddingTop: 2,
-      }}
-    >
+    <Box sx={{ minHeight: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#f9f4ef', overflowX: 'hidden', paddingTop: 2 }}>
       <Typography variant="h4" gutterBottom>
         פוסטים אחרונים
       </Typography>
 
       {editingPost && <EditPost post={editingPost} onCancel={cancelEdit} />}
 
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: 3,
-          width: '90%',
-          maxWidth: '1200px',
-        }}
-      >
+      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 3, width: '90%', maxWidth: '1200px' }}>
         {items.length === 0 ? (
           <Typography variant="body1">אין פוסטים להצגה כרגע.</Typography>
         ) : (
           items.map((post) => (
-            <Card
+            <Link
+              to={`/posts/${post._id}`}
               key={post._id}
-              sx={{
-                borderRadius: 2,
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-                transition: 'transform 0.3s ease',
-                ':hover': {
-                  transform: 'scale(1.05)',
-                  boxShadow: '0 6px 12px rgba(0, 0, 0, 0.2)',
-                },
-              }}
+              style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              <CardContent>
-                <Typography variant="h6" fontWeight="bold">
-                  {post.author?.UserName || 'אנונימי'}
-                </Typography>
-                <Typography variant="body1" sx={{ marginY: 1 }}>
-                  {post.content}
-                </Typography>
-                <Typography variant="caption" color="textSecondary">
-                  {new Date(post.createdAt).toLocaleString('he-IL')}
-                </Typography>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  onClick={() => startEdit(post)}
-                  sx={{ mt: 2, mr: 1 }}
-                >
-                  ערוך
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={() => handleDelete(post._id)}
-                  sx={{ mt: 2 }}
-                >
-                  מחק
-                </Button>
-              </CardContent>
-            </Card>
+              <Card sx={{ borderRadius: 2, boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)', transition: 'transform 0.3s ease', ':hover': { transform: 'scale(1.05)', boxShadow: '0 6px 12px rgba(0, 0, 0, 0.2)' } }}>
+                <CardContent>
+                  <Typography variant="h6" fontWeight="bold">
+                    {post.author?.UserName || 'אנונימי'}
+                  </Typography>
+                  <Typography variant="body1" sx={{ marginY: 1 }}>
+                    {post.content}
+                  </Typography>
+                  <Typography variant="caption" color="textSecondary">
+                    {new Date(post.createdAt).toLocaleString('he-IL')}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Link>
           ))
         )}
       </Box>
