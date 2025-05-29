@@ -308,7 +308,7 @@ const AppBar = () => {
           <ListItem disablePadding sx={{ width: "auto" }}>
             <Button
               component={Link}
-              to="/home"
+              to="/"
               sx={{
                 color: "#5e4429",
                 ":hover": { color: "#8c6e52" },

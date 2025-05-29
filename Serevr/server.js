@@ -80,7 +80,6 @@ app.use('/post', Post_Route);
 
 // נתיב למשתמשים
 app.use('/user', User_Route);
-
 // חיבור ל־MongoDB והאזנה לשרת
 mongoose.connect(process.env.MONGO_CONNECT)
   .then(() => {

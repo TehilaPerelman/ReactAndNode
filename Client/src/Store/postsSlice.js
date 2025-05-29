@@ -401,20 +401,39 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (_, { rejec
 });
 
 // הוספת פוסט חדש
+// export const addPost = createAsyncThunk('posts/addPost', async (newPost, { rejectWithValue }) => {
+//   try {
+//     // נתיב createPost
+//     const res = await axiosInstance.post('/post/createPost', newPost);
+//     return res.data.post; // לפי הקוד בשרת מחזיר אובייקט עם {message, post}
+//   } catch (err) {
+//     return rejectWithValue(err.response?.data?.message || "שגיאה בהוספת פוסט");
+//   }
+// });
+
 export const addPost = createAsyncThunk('posts/addPost', async (newPost, { rejectWithValue }) => {
   try {
-    // נתיב createPost
     const res = await axiosInstance.post('/post/createPost', newPost);
-    return res.data.post; // לפי הקוד בשרת מחזיר אובייקט עם {message, post}
+    return res.data.post;
   } catch (err) {
     return rejectWithValue(err.response?.data?.message || "שגיאה בהוספת פוסט");
   }
 });
 
-// עדכון פוסט קיים - אם יש לך בשרת (כדי להתאים תצטרכי להוסיף בשרת)
+
+// // עדכון פוסט קיים - אם יש לך בשרת (כדי להתאים תצטרכי להוסיף בשרת)
+// export const updatePost = createAsyncThunk('posts/updatePost', async (updatedPost, { rejectWithValue }) => {
+//   try {
+//     const res = await axiosInstance.put(`/post/updatePost/${updatedPost._id}`, updatedPost);
+//     return res.data;
+//   } catch (err) {
+//     return rejectWithValue(err.response?.data?.message || "שגיאה בעדכון הפוסט");
+//   }
+// });
 export const updatePost = createAsyncThunk('posts/updatePost', async (updatedPost, { rejectWithValue }) => {
   try {
-    const res = await axiosInstance.put(`/post/updatePost/${updatedPost._id}`, updatedPost);
+    const { _id, ...updateData } = updatedPost; // מפרידים את ה־_id מהנתונים
+    const res = await axiosInstance.put(`/post/updatePost/${_id}`, updateData);
     return res.data;
   } catch (err) {
     return rejectWithValue(err.response?.data?.message || "שגיאה בעדכון הפוסט");

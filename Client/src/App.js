@@ -86,6 +86,8 @@
 import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+const SinglePost = React.lazy(() => import('./Component/SinglePost')); // ✅ חדש
+
 const UserProfile = React.lazy(() => import('./Component/UserProfile'));
 const CreatePost = React.lazy(() => import('./Component/CreatePost'));
 const PostFeed = React.lazy(() => import('./Component/PostFeed'));
@@ -106,6 +108,7 @@ const App = () => {
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/edit-post/:id" element={<EditPost />} /> {/* ✅ חדש */}
         <Route path="/login" element={<Login />} />
+        <Route path="/posts/:id" element={<SinglePost />} /> {/* ✅ חדש */}
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<div>עמוד לא נמצא</div>} />
       </Routes>
