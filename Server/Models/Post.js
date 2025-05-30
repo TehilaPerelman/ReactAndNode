@@ -12,7 +12,7 @@ const postSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    immutable: true, // כדי שלא יוכלו לשנות את תאריך היצירה
+    immutable: false, // כדי שלא יוכלו לשנות את תאריך היצירה
   },
 });
 

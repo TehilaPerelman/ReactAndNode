@@ -45,7 +45,8 @@ const {
   createPost,
   getAllPosts,
   deletePost,
-  getPostById
+  getPostById,
+  updatePost
 } = require('../Controllers/Controller_Post');
 const authenticateUser = require('../Middlewares/authMiddleware');
 
@@ -55,5 +56,5 @@ router.post('/createPost', authenticateUser, createPost);
 router.get('/getAllPosts', authenticateUser, getAllPosts);
 router.delete('/deletePost/:id', authenticateUser, deletePost);
 router.get('/:id', authenticateUser, getPostById); // ✅ שליפת פוסט לפי ID
-
+router.put('/updatePost/:id', authenticateUser, updatePost); // ← חדש
 module.exports = router;

@@ -167,7 +167,6 @@
 // getPostById, // ✅ מוסף כאן
 // };
 const Post = require("../Models/Post");
-
 const createPost = async (req, res) => {
   const { title, subject, writerName } = req.body;
 
@@ -182,6 +181,33 @@ const createPost = async (req, res) => {
   } catch (error) {
     console.error("שגיאה ביצירת פוסט:", error);
     res.status(500).json({ message: "שגיאת שרת" });
+  }
+};
+const updatePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, subject, writerName } = req.body;
+
+    if (!title || !subject || !writerName) {
+      return res.status(400).json({ message: 'יש למלא את כל השדות לעדכון' });
+    }
+
+    const post = await Post.findById(id);
+    if (!post) {
+      return res.status(404).json({ message: 'פוסט לא נמצא' });
+    }
+
+    // עדכון שדות
+    post.title = title;
+    post.subject = subject;
+    post.writerName = writerName;
+
+    await post.save();
+
+    res.status(200).json(post);
+  } catch (error) {
+    console.error("שגיאה בעדכון הפוסט:", error);
+    res.status(500).json({ message: 'שגיאת שרת' });
   }
 };
 
@@ -230,4 +256,5 @@ module.exports = {
   getAllPosts,
   deletePost,
   getPostById,
+  updatePost
 };

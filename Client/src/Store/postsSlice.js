@@ -421,6 +421,7 @@ export const updatePost = createAsyncThunk('posts/updatePost', async (updatedPos
   }
 });
 
+
 // מחיקת פוסט
 export const deletePost = createAsyncThunk('posts/deletePost', async (postId, { rejectWithValue }) => {
   try {
