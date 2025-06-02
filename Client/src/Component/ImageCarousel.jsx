@@ -175,7 +175,7 @@ const ImageCarousel = () => {
         >
           <SwiperSlide>
             <img
-              src="23.jpg"
+              src="40.jpg"
               alt="תמונה 23"
               style={{
                 width: "180%",
@@ -187,8 +187,8 @@ const ImageCarousel = () => {
           </SwiperSlide>
           <SwiperSlide>
             <img
-              src="37.jpg"
-              alt="תמונה 37"
+              src="39.jpg"
+              alt="תמונה 39"
               style={{
                 width: "180%",
                 height: "120%",
@@ -199,8 +199,8 @@ const ImageCarousel = () => {
           </SwiperSlide>
           <SwiperSlide>
             <img
-              src="20.jpg"
-              alt="תמונה 20"
+              src="38.jpg"
+              alt="תמונה 38"
               style={{
                 width: "180%",
                 height: "120%",
@@ -211,7 +211,7 @@ const ImageCarousel = () => {
           </SwiperSlide>
           <SwiperSlide>
             <img
-              src="9.jpg"
+              src="41.jpg"
               alt="תמונה 9"
               style={{
                 width: "180%",
