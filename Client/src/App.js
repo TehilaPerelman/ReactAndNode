@@ -10,7 +10,7 @@ const Register = React.lazy(() => import('./Component/Register'));
 const Home = React.lazy(() => import('./Component/Home'));
 const AppBar = React.lazy(() => import('./Component/AppBar'));
 const EditPost = React.lazy(() => import('./Component/EditPost'));
-const SinglePost = React.lazy(() => import('./Component/SinglePost')); // ✅ חדש
+const SinglePost = React.lazy(() => import('./Component/SinglePost'));
 
 const App = () => {
   return (
@@ -19,10 +19,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/feed" element={<PostFeed />} />
-        <Route path="/posts/:id" element={<SinglePost />} /> {/* ✅ חדש */}
-        <Route path="/profile/:id" element={<UserProfile />} />
+        <Route path="/posts/:id" element={<SinglePost />} />
         <Route path="/create-post" element={<CreatePost />} />
-        
         <Route path="/edit-post/:id" element={<EditPost />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
