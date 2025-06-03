@@ -76,4 +76,5 @@ router.put('/updatePost/:id', authenticateUser, upload.single("image"), updatePo
 // מחיקת פוסט
 router.delete('/deletePost/:id', authenticateUser, deletePost);
 
+
 module.exports = router;

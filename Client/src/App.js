@@ -22,6 +22,7 @@ const App = () => {
         <Route path="/posts/:id" element={<SinglePost />} /> {/* ✅ חדש */}
         <Route path="/profile/:id" element={<UserProfile />} />
         <Route path="/create-post" element={<CreatePost />} />
+        
         <Route path="/edit-post/:id" element={<EditPost />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
