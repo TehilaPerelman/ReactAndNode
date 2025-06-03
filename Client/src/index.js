@@ -11,7 +11,6 @@ import postsReducer from './Store/postsSlice';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-// יצירת ה-store עם reducers
 const store = configureStore({
   reducer: {
     posts: postsReducer,
